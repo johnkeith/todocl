@@ -1,11 +1,16 @@
 class Todo
+	def clear_screen
+		system "cls"
+	end
 
 	def open_app
+		clear_screen
 		view_all
 	end
 
 	def view_all
-		system "cls"
+		clear_screen
+
 		list_read = read_list
 
 		list_read.each do |line|
@@ -60,7 +65,7 @@ class Todo
 		p "Enter your new todo:"
 		todo = gets.chomp
 		add_todo(todo)
-		choose_action
+		view_all
 	end
 
 #write method
@@ -70,7 +75,8 @@ class Todo
 
 #mark done method
 	def mark_done
-		system "cls"
+		clear_screen
+
 		list_read = File.open("mylist.txt","a+").readlines
 
 		list_read.each_with_index do |line, index|
@@ -97,7 +103,7 @@ class Todo
 			end
 		end
 
-		choose_action
+		view_all
 	end
 
 end
