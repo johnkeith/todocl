@@ -1,0 +1,76 @@
+class Todo
+	attr_accessor :list
+
+	def initialize
+		@list = File.open("mylist.txt","r").readlines
+	end
+
+#initial menu
+	def open_app
+		view_all
+	end
+
+	def choose_action
+		puts %/
+		What would you like to do with your list?
+		1. Add todo
+		2. Mark done
+		3. View all
+		4. Exit/
+
+		choice = gets.chomp.downcase
+
+		case choice
+			when "1" then input_todo
+			when "1." then input_todo
+			when "add" then input_todo
+			when "add todo" then input_todo
+		
+			when "2" then mark_done
+			when "2." then mark_done
+			when "mark" then mark_done
+			when "mark done" then mark_done
+			
+			when "3" then view_all
+			when "3." then view_all
+			when "view" then view_all
+			when "view all" then view_all
+
+			when "4" then return
+			when "4." then return
+			when "exit" then return
+
+			else
+				p "Not a valid choice"
+				choose_action
+		end
+	end
+
+#ask for todo
+	def input_todo
+		p "Enter your new todo:"
+		todo = gets.chomp
+		add_todo(todo)
+		choose_action
+	end
+
+#write method
+	def add_todo(todo)
+		File.open("mylist.txt", "a") { |f| f.write "\n#{todo}" }
+	end
+
+#read (list) method
+	def view_all
+		list.each do |line|
+			puts line
+		end
+		choose_action
+	end
+
+#delete (done) method
+
+end
+
+my_todo_list = Todo.new
+
+my_todo_list.open_app
